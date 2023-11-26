@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class SalesData(models.Model):
 
-    id = models.UUIDField(primary_key=True, editable=False)
+    id = models.BigAutoField(primary_key=True, editable=False)
     purchaser_name = models.CharField(max_length=255)
     item_description = models.CharField(max_length=255)
     item_price = models.DecimalField(max_digits=10, decimal_places=2)

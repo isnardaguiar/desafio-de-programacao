@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,27 +8,10 @@
 </head>
 <body>
     <h2>Upload Sales Data</h2>
-    <!-- <form method="post" enctype="multipart/form-data" action="">
+    <form method="post" enctype="multipart/form-data" action="{% url 'sales:upload' %}">
         {% csrf_token %}
         <input type="file" name="file" accept=".tab">
         <button type="submit">Upload</button>
-    </form> -->
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <body>
-        <h3>Upload</h3>
-        <p>
-            Faça seu upload
-        </p>
-    </body>
-</head>
-<body>
-    
+    </form>
 </body>
 </html>

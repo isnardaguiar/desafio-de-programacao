@@ -59,3 +59,9 @@ O objetivo desse projeto é processar um arquivo do tipo .tab e salvar seus dado
     `localhost:8000/sales/upload/`
     
     - Ao acessar, uma página com instruções será exibida e para utilizar o projeto, basta realizar o upload de uma arquivo do tipo `.tab`. Um exemplo funcional e outro para testar o erro podem ser encontrados na raiz desse projeto.
+3. **Testando o projeto:**
+   -  Para testar a aplicação, foi escolhido o runner pytest. Os testes se encontram nos diretórios [`application/tests`](application/tests) e [`sales/tests`](sales/tests)
+   -  Ao instalar as dependências, o pytest será instalado e basta executar o seguinte comando neste diretório para que os testes automatizados sejam realizados:
+      ```bash
+      pytest
+      ```

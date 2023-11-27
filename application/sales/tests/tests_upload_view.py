@@ -8,7 +8,7 @@ class UploadFileViewTest(TestCase):
         response = self.client.get(url)
 
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'upload.html')
+        self.assertTemplateUsed(response, 'sales/pages/upload.html')
 
     def test_upload_file_view_post(self):
         url = reverse('sales:upload')
@@ -18,7 +18,7 @@ class UploadFileViewTest(TestCase):
         response = self.client.post(url, {'file': file})
 
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'result.html')
+        self.assertTemplateUsed(response, 'sales/pages/result.html')
 
     def test_upload_file_with_error_view_post(self):
         url = reverse('sales:upload')
@@ -29,6 +29,6 @@ class UploadFileViewTest(TestCase):
         response = self.client.post(url, {'file': file})
 
         self.assertEqual(response.status_code, 400)
-        self.assertTemplateUsed(response, 'upload.html')
+        self.assertTemplateUsed(response, 'sales/pages/upload.html')
 
 

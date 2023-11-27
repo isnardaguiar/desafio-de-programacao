@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models  import SalesData
 from django.http import HttpResponse
-
+from application.utils import format_currency
 import csv
 import io
 
@@ -17,7 +17,7 @@ def upload_file(request):
             total_revenue = 0
             file_data = _process_file(request.FILES['file'].read())
 
-            for data in file_data:
+            for data in file_data:   
                 sale_data = SalesData(
                     purchaser_name=data['purchaser_name'],
                     item_description=data['item_description'],
@@ -29,15 +29,20 @@ def upload_file(request):
                 sale_data.save()
 
                 total_revenue += sale_data.item_price * sale_data.purchase_count
+            
+            
+            context = {
+                'total_revenue': format_currency(total_revenue, value_format='decimal'),
+                'file_data': file_data,
+            }
+            return render(request, 'sales/pages/result.html', context=context)
 
-            return render(request, 'result.html', context={'total_revenue': total_revenue})
-
-        return render(request, 'upload.html')
+        return render(request, 'sales/pages/upload.html')
     
 
     except Exception as e:
         print(e)
-        return render(request, 'upload.html', context={'error_message': str(e)}, status=400)
+        return render(request, 'sales/pages/upload.html', context={'error_message': str(e)}, status=400)
 
 
 
@@ -61,3 +66,4 @@ def _process_file(file_content):
         file_data.append(row_data)
 
     return file_data
+

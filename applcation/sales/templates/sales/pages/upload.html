@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    {% include 'sales/partials/head.html' %}
+<body>
+    <header>
+        <h1>Upload de Arquivo de Vendas</h1>
+    </header>
+
+    <div class="container">
+        <div class="instructions">
+            <h2>Instruções:</h2>
+            <p>Selecione um arquivo no formato .tab (separado por tabulação) para realizar o upload.</p>
+            <p>A primeira linha devem ser as colunas e os nomes devem estar com os nomes a seguir e os elementos devem estar de acordo com o tipo informado entre parênteses:
+                <ul>
+                    <li>purchaser name (texto)</li>
+                    <li>item description (texto)</li>
+                    <li>item price (decimal)</li>
+                    <li>purchase count (inteiro)</li>
+                    <li>merchant address (texto)</li>
+                    <li>merchant name (texto)</li>
+                </ul>
+            </p>
+        </div>
+        {% if error_message %}
+            <div class="error_card" style="color: red;">
+                <p>
+                    Ocorreu um erro ao tentar processar a requisição:
+                    <br>
+                    {{ error_message }}
+                </p>
+            </div>
+        {% endif %}
+        <form method="post" enctype="multipart/form-data" action="{% url 'sales:upload' %}">
+            {% csrf_token %}
+            <input type="file" name="file" accept=".tab">
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+</body>
+</html>

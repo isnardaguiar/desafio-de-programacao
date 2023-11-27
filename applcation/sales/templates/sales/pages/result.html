@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    {% include 'sales/partials/head.html' %}
+<body>
+    <header>
+        <h1>Upload de Arquivo de Vendas</h1>
+    </header>
+
+    <div class="container">
+        <h2>Resultados do upload</h2>
+        <p>Total das vendas: {{ total_revenue }}</p>
+
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Purchaser Name</th>
+                    <th>Item Description</th>
+                    <th>Item Price</th>
+                    <th>Purchase Count</th>
+                    <th>Merchant Address</th>
+                    <th>Merchant Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in file_data %}
+                    <tr>
+                        <td>{{ item.purchaser_name }}</td>
+                        <td>{{ item.item_description }}</td>
+                        <td>{{ item.item_price }}</td>
+                        <td>{{ item.purchase_count }}</td>
+                        <td>{{ item.merchant_address }}</td>
+                        <td>{{ item.merchant_name }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

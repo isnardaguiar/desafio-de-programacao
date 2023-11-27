@@ -5,12 +5,6 @@ from application.utils import format_currency
 import csv
 import io
 
-# Create your views here.
-def hello_world(request, *args, **kwargs):
-
-    return HttpResponse("Hello World")
-
-
 def upload_file(request):
     try:
         if request.method == 'POST' and request.FILES['file']:

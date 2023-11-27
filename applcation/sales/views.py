@@ -12,26 +12,33 @@ def hello_world(request, *args, **kwargs):
 
 
 def upload_file(request):
-    if request.method == 'POST' and request.FILES['file']:
-        total_revenue = 0
-        file_data = _process_file(request.FILES['file'].read())
+    try:
+        if request.method == 'POST' and request.FILES['file']:
+            total_revenue = 0
+            file_data = _process_file(request.FILES['file'].read())
 
-        for data in file_data:
-            sale_data = SalesData(
-                purchaser_name=data['purchaser_name'],
-                item_description=data['item_description'],
-                item_price=data['item_price'],
-                purchase_count=data['purchase_count'],
-                merchant_address=data['merchant_address'],
-                merchant_name=data['merchant_name'],
-            )
-            sale_data.save()
+            for data in file_data:
+                sale_data = SalesData(
+                    purchaser_name=data['purchaser_name'],
+                    item_description=data['item_description'],
+                    item_price=data['item_price'],
+                    purchase_count=data['purchase_count'],
+                    merchant_address=data['merchant_address'],
+                    merchant_name=data['merchant_name'],
+                )
+                sale_data.save()
 
-            total_revenue += sale_data.item_price * sale_data.purchase_count
+                total_revenue += sale_data.item_price * sale_data.purchase_count
 
-        return render(request, 'result.html', context={'total_revenue': total_revenue})
+            return render(request, 'result.html', context={'total_revenue': total_revenue})
 
-    return render(request, 'upload.html')
+        return render(request, 'upload.html')
+    
+
+    except Exception as e:
+        print(e)
+        return render(request, 'upload.html', context={'error_message': str(e)}, status=400)
+
 
 
 def _process_file(file_content):

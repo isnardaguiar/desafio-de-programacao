@@ -8,6 +8,15 @@
 </head>
 <body>
     <h2>Upload Sales Data</h2>
+    {% if error_message %}
+        <div style="color: red;">
+            <p>
+                Ocorreu um erro ao tentar processar a requisição:
+                <br>
+                {{ error_message }}
+            </p>
+        </div>
+    {% endif %}
     <form method="post" enctype="multipart/form-data" action="{% url 'sales:upload' %}">
         {% csrf_token %}
         <input type="file" name="file" accept=".tab">
